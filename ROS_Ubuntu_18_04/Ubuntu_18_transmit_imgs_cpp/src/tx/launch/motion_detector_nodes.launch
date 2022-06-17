@@ -1,0 +1,14 @@
+<launch>
+    <node
+        pkg="tx"
+        type="motion_detector_pub_node"
+        name="motion_detector_pub_node"
+        output="screen"
+    />
+    <node
+        pkg="tx"
+        type="motion_detector_sub_node"
+        name="motion_detector_sub_node"
+        output="screen"
+    />
+</launch>

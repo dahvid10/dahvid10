@@ -1,0 +1,14 @@
+<launch>
+    <node
+        pkg="tx"
+        type="img_tx_pub_node"
+        name="img_tx_pub_node"
+        output="screen"
+    />
+    <node
+        pkg="tx"
+        type="img_tx_sub_node"
+        name="img_tx_sub_node"
+        output="screen"
+    />
+</launch>
