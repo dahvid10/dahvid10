@@ -1,5 +1,1 @@
-- 👋🏾 Hi, I’m David
-- 👀 I explore blockchain, machine learning, cybersecurity, and autonomous robotics in energy, healthcare, and finance
-- 🌱 I learn every day
-- 💞️ I look to collaborate on projects that align with my interests
-- 📫 Reach me by email: david.mkoji@gmail.com or phone: 850-284-9938
+
