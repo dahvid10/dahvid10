@@ -1,0 +1,14 @@
+Understand Graphs
+
+1 implement graph
+1 traverse graph
+	1 BFS
+	1 DFS
+	1 all paths
+	1 shortest path (brute force)
+	1 Dijkstra's algorithm (shortest path)
+1 reps (10x)
+	1 BFS
+	1 DFS
+	1 all paths & shortest path (brute force)
+	1 Dijkstra's algorithm (shortest path)
