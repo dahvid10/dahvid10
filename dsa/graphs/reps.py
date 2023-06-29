@@ -39,8 +39,6 @@ def sort_graph(graph):
 
 # REPS
 # BFS
-
-
 def scratch_bfs():
     # pseudocode
     # start with graph, start, target, queue, path, visited_dict
