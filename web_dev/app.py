@@ -18,8 +18,8 @@ position_scale = {
 
 location_scale = {
     'Houston, TX, USA': .95,
-    'Nairobi, Kenya': 0.8,
-    'Remote': 0.8
+    'Nairobi, Kenya': 0.85,
+    'Remote': 0.85
 }
 
 JOBS = []
