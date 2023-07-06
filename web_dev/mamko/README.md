@@ -1,1 +1,1 @@
-Visit website at https://mamko.dev/
+Visit https://mamko.dev/
