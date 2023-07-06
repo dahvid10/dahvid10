@@ -47,9 +47,7 @@
         finance.
       </p>
 
-      <h2 class="display-4 text-center py-2">
-        Available Positions ({{num_jobs}})
-      </h2>
+      <h2 class="display-4 text-center py-2">Positions ({{num_jobs}})</h2>
       <div class="px-4">
         {% for job in jobs %} {% include 'job_item.html' %} {% endfor %}
       </div>
