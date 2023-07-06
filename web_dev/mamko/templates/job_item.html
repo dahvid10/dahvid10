@@ -7,8 +7,12 @@
     {% endif %}
   </div>
   <div class="col-3 d-inline-flex justify-content-end align-items-center">
-    <button type="button" class="btn btn-outline-primary align-middle">
+    <a
+      href="mailto:david.mkoji@gmail.com?subject=Application%20for%20{{job['position']}} at Mamko&body={{job['description']}}%0D%0A%0D%0AName%3A%20%3CFirst%20and%20Last%20Names%3E%0D%0A%0D%0AResume%20Link%3A%20%3CResume%20link%20if%20not%20attached%3E%0D%0A%0D%0AComments%3A%20%3Canything%20you%20would%20like%20Mamko%20to%20consider%3E"
+      type="button"
+      class="btn btn-outline-primary align-middle"
+    >
       Apply
-    </button>
+    </a>
   </div>
 </div>

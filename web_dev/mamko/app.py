@@ -8,6 +8,14 @@ position_salary = {
     'Synergist': 150000    
 }
 
+position_description = {
+    'Legal Developer': 'Legal developers collaborate to advocate for Mamko\'s commercial interests.',
+    'Medical Developer': 'Medical developers collaborate to improve healthcare.',
+    'Energy Technologist': 'Energy technologists collaborate to create solutions in the energy industry.',
+    'Financial Technologist': 'Financial Technologists collaborate to create financial solutions.',
+    'Synergist': 'Synergists collaborate to ensure Mamko\'s ecosystem thrives.'    
+}
+
 position_scale = {
     1: .65,
     2: .75,
@@ -31,7 +39,8 @@ for position in position_salary:
                 'id': id,
                 'position': position + ' ' + str(rank),
                 'location': location,
-                'salary': '$' + str(int(position_salary[position] * position_scale[rank] * location_scale[location]))
+                'salary': '$' + str(int(position_salary[position] * position_scale[rank] * location_scale[location])),
+                'description': position_description[position]
             }
             JOBS.append(role)
             id += 1
