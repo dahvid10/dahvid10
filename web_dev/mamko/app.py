@@ -1,8 +1,8 @@
 from flask import Flask, render_template, jsonify
 
 position_salary = {
-    'Legal Developer': 250000,
-    'Medical Developer': 250000,
+    'Legal Developer': 200000,
+    'Medical Developer': 200000,
     'Energy Technologist': 250000,
     'Financial Technologist': 250000,
     'Synergist': 150000    
