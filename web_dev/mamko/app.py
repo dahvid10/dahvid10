@@ -56,6 +56,14 @@ def home():
 def list_jobs():
     return jsonify(JOBS)
 
+@app.route('/products')
+def showcase():
+    return 'Incoming'
+
+@app.route('/faqs')
+def faqs():
+    return 'Incoming'
+
 if __name__ == '__main__':
     app.debug = True
     app.run()
