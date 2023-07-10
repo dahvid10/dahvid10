@@ -28,7 +28,7 @@ location_scale = {
     'Remote': 0.85
 }
 
-positions = []
+positions_list = []
 id = 0
 for position in position_salary:
     for rank in position_scale:
@@ -37,8 +37,8 @@ for position in position_salary:
                 'id': id,
                 'position': position + ' ' + str(rank),
                 'location': location,
-                'salary': '$' + str(int(position_salary[position] * position_scale[rank] * location_scale[location])),
+                'salary': int(position_salary[position] * position_scale[rank] * location_scale[location]),
                 'description': position_description[position]
             }
-            positions.append(role)
+            positions_list.append(role)
             id += 1

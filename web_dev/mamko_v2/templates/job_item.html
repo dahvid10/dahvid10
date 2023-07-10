@@ -3,7 +3,7 @@
     {% if ('position' in job) and ('location' in job) and ('salary' in job) %}
     <h4 style="color: rgb(100, 100, 100)" class="my-2">{{job['position']}}</h4>
     <div><b>Location:</b> {{job['location']}}</div>
-    <div><b>Salary:</b> {{job['salary']}}</div>
+    <div><b>Salary:</b> ${{job['salary']}}</div>
     {% endif %}
   </div>
   <div class="col-3 d-inline-flex justify-content-end align-items-center">
