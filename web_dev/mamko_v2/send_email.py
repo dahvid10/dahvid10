@@ -3,14 +3,14 @@ from email.message import EmailMessage
 # from dotenv import load_dotenv
 # load_dotenv()
 
-def send_email(app_email):
+def send_email(app_email, app_position):
     email_sender = 'mamko.contact@gmail.com'
     email_password = os.getenv('EMAIL_PWD')
     email_receiver = app_email
     email_server = 'smtp.gmail.com'
 
-    subject = 'test'
-    body = 'test'
+    subject = 'Mamko Application Received - {}'.format(app_position)
+    body = 'Thank you for your application to the position {}.  We will review it and update you soon. \n\nMamko'.format(app_position)
     em = EmailMessage()
     em['From'] = email_sender
     em['To'] = email_receiver
