@@ -2,8 +2,8 @@ import mysql.connector
 from mysql.connector import errorcode
 import os
 from positions import positions_list
-# from dotenv import load_dotenv
-# load_dotenv()
+from dotenv import load_dotenv
+load_dotenv()
 
 # get database credentials
 conn_user = os.environ.get('DB_USERNAME')
@@ -149,8 +149,8 @@ def ins_app(new_app):
         )
     cursor = conn.cursor()        
     add_app = ("INSERT INTO applications "
-            "(pos_id, first_name, last_name, email, phone, resume, comments) "
-            "VALUES (%(pos_id)s, %(first_name)s, %(last_name)s, %(email)s, %(phone)s, %(resume)s, %(comments)s)")
+            "(pos_id, first_name, last_name, email, phone, resume, comments, timestamp) "
+            "VALUES (%(pos_id)s, %(first_name)s, %(last_name)s, %(email)s, %(phone)s, %(resume)s, %(comments)s, %(timestamp)s)")
     cursor.execute(add_app, new_app)
     conn.commit() # commit changes after INSERT statement
     cursor.close()
