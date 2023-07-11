@@ -1,0 +1,7 @@
+<h4 class="display-4 text-center py-2">Positions ({{num_jobs}})</h4>
+<p class="mx-2 px-4 text-center blockquote lead">
+  We continually onboard innovators. Explore opportunities at Mamko!
+</p>
+<div class="px-4">
+  {% for job in jobs %} {% include 'job_item.html' %} {% endfor %}
+</div>

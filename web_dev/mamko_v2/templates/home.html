@@ -23,42 +23,10 @@
       crossorigin="anonymous"
     ></script>
     {% include 'navbar.html' %}
+
     <div id="container">
-      <!-- <h1 class="display-1 text-center mt-4 mb-4 pt-2 pb-2">Mamko</h1> -->
-
-      <div id="banner" class="row text-center px-4 py-2 mt-2">
-        <div id="photo" class="col">
-          <img src="static/energy.jpg" class="img-fluid img-thumbnail" />
-        </div>
-        <div id="photo" class="col">
-          <img src="static/healthcare.jpg" class="img-fluid img-thumbnail" />
-        </div>
-        <div id="photo" class="col">
-          <img src="static/technology.jpg" class="img-fluid img-thumbnail" />
-        </div>
-        <div id="photo" class="col">
-          <img src="static/finance.jpg" class="img-fluid img-thumbnail" />
-        </div>
-      </div>
-
-      <h4 class="display-4 text-center mt-4 mb-2 py-2">About Mamko</h2>
-
-      <p class="mx-2 px-4 text-center lead">
-        Mamko aims to create innovative solutions in energy, healthcare and
-        finance.
-      </p>
-
-      <h4 class="display-4 text-center py-2">Positions ({{num_jobs}})</h2>
-      <p class="mx-2 px-4 text-center blockquote lead">
-        We continually onboard innovators. Explore opportunities at Mamko!
-      </p>
-      <div class="px-4">
-        {% for job in jobs %} {% include 'job_item.html' %} {% endfor %}
-      </div>
-      <!-- <div class="text-center py-2 mt-4">
-        <button class="btn btn-primary btn-lg">Contact Us</button>
-        <p class="mt-4">Copyright 2023, Mamko</p>
-      </div> -->
+      {% include 'banner.html' %} {% include 'about.html' %} {% include
+      'positions.html' %}
     </div>
     {% include 'footer.html' %}
   </body>

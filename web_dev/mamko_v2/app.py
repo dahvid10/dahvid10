@@ -1,13 +1,9 @@
-from flask import Flask, render_template, jsonify
-from database import fetched_positions
-# from database import conn_user, conn_pwd, conn_host, conn_db, TABLES as tables
-# import mysql.connector
+import os
+from flask import Flask, render_template, jsonify, request
+from database import fetched_positions, load_position_by_id, ins_app
+from send_email import send_email
 
 app = Flask(__name__)
-
-
-
-# load_positions()
 
 @app.route('/')
 def home():
@@ -27,6 +23,35 @@ def showcase():
 def faqs():
     return 'Incoming'
 
+@app.route('/job/<id>', methods=('GET', 'POST'))
+def show_job(id):
+    # get position from positions table in db
+    position = load_position_by_id(id)
+    if not position:
+        return "Not Found", 404
+    
+    if (request.method == 'POST'):
+        # get submitted app data
+        app_data = request.form
+        app_data = app_data.to_dict() # make submitted data modifiable
+        # add position id
+        app_data['pos_id'] = id 
+        # store app data in 'applications' table in db
+        ins_app(app_data)
+        print('here 100')
+        try:
+            # send an acknowledgement email
+            send_email(app_data['email'])
+        except:
+            pass
+        # display an acknowledgement
+        return render_template('app_ack.html',
+                               app_data=app_data,
+                               position=load_position_by_id(id))
+
+    return render_template('application_form.html',
+                            position=position)
+    
 if __name__ == '__main__':
     app.debug = True
     app.run()
