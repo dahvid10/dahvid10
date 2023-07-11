@@ -1,4 +1,5 @@
 import os
+from datetime import datetime
 from flask import Flask, render_template, jsonify, request
 from database import fetched_positions, load_position_by_id, ins_app
 from send_email import send_email
@@ -36,6 +37,9 @@ def show_job(id):
         app_data = app_data.to_dict() # make submitted data modifiable
         # add position id
         app_data['pos_id'] = id 
+        # add time stamp        
+        timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        app_data['timestamp'] = timestamp
         # store app data in 'applications' table in db
         ins_app(app_data)
         print('here 100')

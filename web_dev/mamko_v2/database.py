@@ -44,6 +44,7 @@ def add_tables_to_db():
         "   `phone` VARCHAR(50),"
         "   `resume` VARCHAR(250),"
         "   `comments` VARCHAR(250),"
+        "   `timestamp` VARCHAR(25),"
         "  PRIMARY KEY (`app_id`)"
         ") ENGINE=InnoDB")
 
