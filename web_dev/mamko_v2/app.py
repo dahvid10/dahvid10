@@ -45,7 +45,7 @@ def show_job(id):
         print('here 100')
         try:
             # send an acknowledgement email
-            send_email(app_data['email'], app_data['position'])
+            send_email(app_data['email'], position['position'])
         except:
             pass
         # display an acknowledgement

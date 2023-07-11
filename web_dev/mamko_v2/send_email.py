@@ -1,7 +1,7 @@
 import os, ssl, smtplib, sys
 from email.message import EmailMessage
-# from dotenv import load_dotenv
-# load_dotenv()
+from dotenv import load_dotenv
+load_dotenv()
 
 def send_email(app_email, app_position):
     email_sender = 'mamko.contact@gmail.com'

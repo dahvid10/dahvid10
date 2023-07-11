@@ -2,8 +2,8 @@ import mysql.connector
 from mysql.connector import errorcode
 import os
 from positions import positions_list
-# from dotenv import load_dotenv
-# load_dotenv()
+from dotenv import load_dotenv
+load_dotenv()
 
 # get database credentials
 conn_user = os.environ.get('DB_USERNAME')
