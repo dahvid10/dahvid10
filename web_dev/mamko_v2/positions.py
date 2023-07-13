@@ -1,9 +1,9 @@
 position_salary = {
-    'Legal Developer': 200000,
-    'Medical Developer': 200000,
+    'Legal Developer': 250000,
+    'Medical Developer': 250000,
     'Energy Technologist': 250000,
     'Financial Technologist': 250000,
-    'Synergist': 150000    
+    'Synergist': 200000    
 }
 
 position_description = {
