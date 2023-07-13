@@ -42,7 +42,6 @@ def show_job(id):
         app_data['timestamp'] = timestamp
         # store app data in 'applications' table in db
         ins_app(app_data)
-        print('here 100')
         try:
             # send an acknowledgement email
             send_email(app_data['email'], position['position'])
