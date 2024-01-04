@@ -1,1 +1,1 @@
-Visit https://mamko.dev/
+Sample career website
