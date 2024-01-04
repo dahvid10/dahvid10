@@ -44,3 +44,6 @@ def merge_sort(arr):
         # return sorted arr
         return arr
     return merger(arr)
+
+arr = [6, 34, 24, 32, 23]
+print(merge_sort(arr))
