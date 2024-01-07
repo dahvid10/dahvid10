@@ -45,7 +45,6 @@ class graph {
                     cout << " | " << v.first << "-" << e << " | ";
                 }
             }
-            cout << endl << endl;
         }
 
         // add edge
@@ -84,248 +83,411 @@ class graph {
         }
 
         // bft
-        void bft(string start) {
-            // initialize queue and visited vector with start node
-            // traverse graph while queue is not empty (until all nodes visited)
-                // get next node in queue
-                // add neighbors of current node to visited vector and queue if they have not been visited
-            cout << "Breadth First Traversal" << endl;
+        void bft(string start)
+        {
+            // map to check visited nodes
+            // path
+            // queue
+            // while q not empty
+                // get node from queue
+                // for all neighbors
+                    // if not visited
+                        // add to queue
+                        // set as visited
+
+
+            cout << "\n\nBreadth-first traversal from " << start << endl;
+
+            map<string, bool> visited_map;
+            for (auto node : adjList)
+            {
+                if (node.first == start)
+                {
+                    visited_map[node.first] = true;
+                }
+                else
+                {
+                    visited_map[node.first] = false;
+                }
+            }
+
+            vector<string> path;
             queue<string> q;
-            vector<string> visited;
             q.push(start);
-            visited.push_back(start);
-            
-            while (q.empty() != true) {
+
+            while (q.empty() == false)
+            {
                 string cur = q.front();
                 q.pop();
-                cout << cur << " ";
-                for (string neighbor : adjList[cur]) {
-                    if (find(visited.begin(), visited.end(), neighbor) == visited.end()) {
+                path.push_back(cur);
+                for (auto neighbor : adjList[cur])
+                {
+                    if (visited_map[neighbor] == false)
+                    {
+                        visited_map[neighbor] = true;
                         q.push(neighbor);
-                        visited.push_back(neighbor);
                     }
                 }
             }
-            cout << endl << endl;
+            for (auto node : path) {
+                cout << node << " ";
+            }
         }
 
         // dft
-        vector<string> dft_helper(string start, vector<string> visited, stack<string> s)
+        tuple<vector<string>, map<string, bool>> dft_helper(string start, map<string, bool> visited_map, stack<string> s, vector<string> path)
         {
-            if (s.empty() != true) {
-                string cur = s.top();
-                
-                if(find(visited.begin(), visited.end(), cur) == visited.end()) {
-                    visited.push_back(cur);
-                }
+            // add start node to path
+            // if stack not empty
+                // get top node
+                // set as visited
+                // for all neighbors
+                    // if not visited
+                        // add to stack
+                        // recursive call with neighbor as start
+            // pop stack
+            // return path and visited map
 
+            path.push_back(start);
+            if (s.empty() == false) {
+                string cur = s.top();
+                visited_map[cur] = true;
                 for (auto neighbor : adjList[cur]) {
-                    if (find(visited.begin(), visited.end(), neighbor) == visited.end()) {
+                    if (visited_map[neighbor] == false) {
                         s.push(neighbor);
-                        visited = dft_helper(neighbor, visited, s);
+                        tie(path, visited_map) = dft_helper(neighbor, visited_map, s, path);
                     }
                 }
-
-                s.pop();
             }
-            return visited;
+            s.pop();
+            return {path, visited_map};
         }
 
         void dft(string start) {
-            // initialize stack (with start node) and visited vector (empty)
-            // use helper fn for recursive traversal
-                // if stack not empty
-                    // get current node from stack
-                    // if current node hasn't been visited add it to visited vector
-                    // if neighbors haven't been visited
-                        // add neighbors of current node to stack 
-                        // update visited vector with recursive call
-                    // pop stack
-                // return visited vector
-            // update visited vector with call to helper fn
-            cout << "Depth First Traversal" << endl;
+            // map for visited nodes
+            // vector for path
+            // stack for traversal
 
+            // verify start node in graph
+            // add start to stack
+            // set path and visited map to initial call of helper fn (begin dft)
+
+            cout << "\n\nDepth-first traversal from " << start << endl;
+
+            map<string, bool> visited_map;
+            vector<string> path;
             stack<string> s;
-            s.push(start);
-            vector<string> visited;
-            
-            visited = dft_helper(start, visited, s);
 
-            for (string node : visited) {
-                cout << node << " ";
+            for (auto node : adjList) {
+                visited_map[node.first] = false;
             }
 
-            cout << endl << endl;
+            map<string, bool>::iterator visited_it;
+            visited_it = visited_map.find(start);
+            if (visited_it == visited_map.end()) {
+                cout << "Start node, " << start << ", not in graph!" << endl;
+                return;
+            }
+
+            s.push(start);
+
+            tie(path, visited_map) = dft_helper(start, visited_map, s, path);
+
+            for (auto node : path) {
+                cout << node << " ";
+            }
         }
 
         void bfs(string start, string dest) {
-            // alert if dest node not in graph
-            // if start is dest
-                // add start to path
+            // verify start and dest in graph
+            
+            // map for visited nodes
+            // vector for path
+            // bool for found
+            // queue for traversal
+
+            // add start to queue
+            // set start as visited
+
+            // if start == dest
                 // found = true
-                // return
-            // create queue and visited vector
-            // while node not found
-                // get cur node from queue
-                // if neighbor is dest
-                    // set found as true
-                    // return
-                // for all neighbors of cur node
+                // add start to path
+
+            // while queue not empty and dest not found
+                // get node from queue
+                // add node to path
+                // if node == dest
+                    // found = true
+                    // break
+                // for each neighbor of node
                     // if neighbor not visited
-                        // add node to queue and visited vector
+                        // set neighbor as visited
+                        // add neighbor to queue
 
-            cout << "Breadth-first search from " << start << " to " << dest << endl;
+            // print nodes in path
 
-            if (adjList.find(dest) == adjList.end()) {
-                printf("%s not in graph!", dest);
-                return;
+            cout << "\n\nBreadth-first search from " << start << " to " << dest << endl;
+
+            map<string, vector<string>>::iterator start_it;
+            map<string, vector<string>>::iterator dest_it;
+
+            start_it = adjList.find(start);
+            dest_it = adjList.find(dest);
+            if(start_it == adjList.end()) {
+                cout << "Start node, " << start << ", not in graph!" << endl;
+            } else if (dest_it == adjList.end()) {
+                cout << "Destination node, " << dest << ", not in graph!" << endl;
             }
 
-            queue<string> q;
-            q.push(start);
-            vector<string> visited = {start};
-            vector <string> path;
+            map<string, bool> visited_map;
+            vector<string> path;
             bool found = false;
+            queue<string> q;
 
-            if (start == dest)
-            {
+            for (auto node : adjList) {
+                visited_map[node.first] = false;
+            }
+            visited_map[start] = true;
+            q.push(start);
+
+            if(start == dest) {
                 path.push_back(start);
                 found = true;
-                cout << start << endl;
-                return;
             }
 
-            while(found != true) {
+            while ((q.empty() == false) && (found == false)) {
                 string cur = q.front();
                 q.pop();
-                cout << cur << " ";
                 path.push_back(cur);
+
                 if (cur == dest) {
                     found = true;
-                    return;
+                    break;
                 }
-                for (string neighbor : adjList[cur]) {
-                    if (find(visited.begin(), visited.end(), neighbor) == visited.end()) {
-                        visited.push_back(neighbor);
+
+                for (auto neighbor : adjList[cur]) {
+                    if (visited_map[neighbor] == false) {
+                        visited_map[neighbor] = true;
                         q.push(neighbor);
                     }
                 }
+            }
+
+            for (auto node : path) {
+                cout << node << " ";
             }
         }
 
         
-        vector<string> dfs_helper(string start, string dest, bool found, vector<string> visited, stack<string> s) {
-            // return visited vector if dest node is found
-            // if stack not empty
-                // get cur node
-                // if cur node hasn't been visited
-                    // add cur node to visited
-                // if cur node = dest
-                    // set found = true
-                    // return visited
-                // for all neighbors of cur node
-                    // if neighbor not been visited
-                        // add neighbor to stack
-                        // update visited = recursive call to helper fn with neighbor as start
-                // remove last node from stack
-            // return visited vector
-            if (found == true) {
-                return visited;
-            }
+        tuple<vector<string>, map<string, bool>, bool> dfs_helper(string start, string dest, map<string, bool> visited_map, vector<string> path, stack<string> s, bool found) {
 
-            if (s.empty() == false) {
+            // if stack not empty and dest not found
+                // get top node
+                // set top node as visited
+                // add start to path
+                // if start == dest
+                    // set found as true
+                    // return path, visited_map, and found
+                // for neighbors of top node
+                    // if neighbor not visited
+                        // add neighbor to stack
+                        // set path, visited map, and found to recursive call with neighbor as start
+                    // if dest found
+                        // stop searching neighbors
+            // pop stack
+            // return path, visited map, and found
+
+            if ((s.empty() == false) && (found == false)) {
                 string cur = s.top();
-                if (find(visited.begin(), visited.end(), cur) == visited.end()) {
-                    visited.push_back(cur);
-                }
-                if (cur == dest) {
+                visited_map[cur] = true;
+                path.push_back(cur);
+                if (start == dest) {
                     found = true;
-                    return visited;
+                    return {path, visited_map, found};
                 }
-                for (string neighbor : adjList[cur]) {
-                    if (find(visited.begin(), visited.end(), neighbor) == visited.end()) {
+                for (auto neighbor : adjList[cur]) {
+                    if (visited_map[neighbor] == false) {
                         s.push(neighbor);
-                        visited = dfs_helper(neighbor, dest, found, visited, s);
+                        tie(path, visited_map, found) = dfs_helper(neighbor, dest, visited_map, path, s, found);
+                    }
+                    if (found == true) {
+                        break;
                     }
                 }
-                s.pop();
             }
-
-            return visited;
+            s.pop();
+            return {path, visited_map, found};
         }
 
         void dfs(string start, string dest) {
-            // initialize stack and visited vector (with start node)
-            // initialize found = false
-            // if start == dest
-                // add node to path
-                // found = true
-            // set visited = initial call to helper fn
+            // map for visited nodes
+            // stack for traversal
+            // vector for path 
+            // bool for found
+            
+            // check if start and dest nodes are in graph
+            // add start to stack
+            // set path and visited map to initial call of helper fn (begin dfs)
 
-            cout << "\n\nDepth-first search from " << start << " to " << dest << endl; 
+            // print path
 
-            stack<string> s; 
-            s.push(start);
-            vector<string> visited;
+            cout << "\n\nDepth-first search from " << start << " to " << dest << endl;
+            map<string, bool> visited_map;
+            stack<string> s;
+            vector<string> path;
             bool found = false;
-            if (start == dest) {
-                visited.push_back(start);
-                found = true;
+
+            for (auto node : adjList) {
+                visited_map[node.first] = false;
             }
 
-            visited = dfs_helper(start, dest, found, visited, s);
+            map<string, bool>::iterator start_it, dest_it;
+            start_it = visited_map.find(start);
+            dest_it = visited_map.find(dest);
 
-            for (string vertex : visited) {
-                cout << vertex << " ";
+            if (start_it == visited_map.end()) {
+                cout << "Start node, " << start << ", not in graph!" << endl;
+                return;
+            } else if (dest_it == visited_map.end()) {
+                cout << "Destination node, " << dest << ", not in graph!" << endl;
+                return;
+            }
+
+            if (start == dest) {
+                path.push_back(start);
+            } else {
+                s.push(start);
+                tie(path, visited_map, found) = dfs_helper(start, dest, visited_map, path, s, found);
+            }
+
+            for (auto node : path) {
+                cout << node << " ";
             }
         }
 
-        tuple<map<string, int>, map<string,string>> dijkstra_unweighted(string start) {
-            cout << "\n\nDijkstra algorithm - unweighted\n";
-            map<string, int> known_dist_map; 
-            map<string, string> prev_node_map;
+        tuple<map<string, int>, map<string, string>> dijkstra_unweighted(string start) {
+            // verify start node in graph
+
+            // map for known distances: all infinite except start node(=0)
+            // map for previous nodes: all unknown (="")
+            // map for visited nodes: all unvisited
+            // vector for unvisited nodes: all nodes in graph
+
+            // while unvisited nodes not empty
+                // get closest unvisited node
+                // visit its neighbors
+                    // if new distance < known distance
+                        // update neighbors' distance and previous node
+                // set node as visited in map and vector
+            
+            // print distances and previous nodes for each node
+
+            cout << "\n\nDijkstra Algorithm: distances and previous nodes from " << start << endl;
+
+            map<string, vector<string>>::iterator start_it;
+            start_it = adjList.find(start);
+            map<string, int> known_dist_map;
+            map<string, string> prev_nodes_map;
             map<string, bool> visited_map;
-            vector<string> unvisited_vect;
+            vector<string> unvisited_vector;
+            const int INF = numeric_limits<int>::max();
+
+            if (start_it == adjList.end()) {
+                cout << "Start node, " << start << ", not in graph!" << endl;
+                return {known_dist_map, prev_nodes_map};
+            }
 
             for (auto node : adjList) {
-                known_dist_map[node.first] = numeric_limits<int>::max();
-                prev_node_map[node.first] = "";
+                known_dist_map[node.first] = INF;
+                prev_nodes_map[node.first] = "";
                 visited_map[node.first] = false;
-                unvisited_vect.push_back(node.first);
+                unvisited_vector.push_back(node.first);
             }
 
             known_dist_map[start] = 0;
-
-            while (unvisited_vect.empty() != true) {
-                int dist = numeric_limits<int>::max();
-                string cur;
-                for (auto node : adjList) {
-                    if ((known_dist_map[node.first] < dist) && (visited_map[node.first] == false)) {
-                        cur = node.first;
-                        dist = known_dist_map[cur];
+            int dist = INF, cur_dist;
+            string cur;
+            while (unvisited_vector.empty() == false) {
+                for (auto node : unvisited_vector) {
+                    if ((visited_map[node] == false) && (known_dist_map[node] < dist)) {
+                        cur = node;
+                        cur_dist = known_dist_map[cur];
                     }
                 }
-
-                map<string, int> calc_dist_map;
-                int cur_dist = known_dist_map[cur] + 1;
+                int new_dist = cur_dist + 1;
                 for (auto neighbor : adjList[cur]) {
-                    calc_dist_map[neighbor] = cur_dist;
-                    if(calc_dist_map[neighbor] < known_dist_map[neighbor]) {
-                        known_dist_map[neighbor] = calc_dist_map[neighbor];
-                        prev_node_map[neighbor] = cur;
+                    if (new_dist < known_dist_map[neighbor]) {
+                        known_dist_map[neighbor] = new_dist;
+                        prev_nodes_map[neighbor] = cur;
                     }
                 }
-
                 visited_map[cur] = true;
-                unvisited_vect.erase(remove(unvisited_vect.begin(), unvisited_vect.end(), cur), unvisited_vect.end());
+                unvisited_vector.erase(remove(unvisited_vector.begin(), unvisited_vector.end(), cur), unvisited_vector.end());
             }
 
-            cout << "\nDijkstra Distances and Previous Nodes\n";
             for (auto node : known_dist_map) {
-                cout << node.first << ": " << node.second << "\t" << prev_node_map[node.first] << endl;
+                cout << node.first << ": " << known_dist_map[node.first] << "\t" << prev_nodes_map[node.first] << endl;
+            }
+
+            return {known_dist_map, prev_nodes_map};
+        }
+
+        void dijkstra_shortest_path(string start, string dest)
+        {
+            // verify start and dest nodes in graph
+            // if start == dest
+                // add start to path
+                // add start to stack
+            // get known distances and previous nodes from dijkstra algorithm
+            // stack for traversal
+            // set cur node as dest
+            // set previous node as dest's previous node
+            // while (cur != start)
+                // add current node's previous node to stack
+                // set current node as previous node
+            // if (cur == start)
+                // add cur to stack
+            // while (stack not empty)
+                // get top node and print it, then pop stack
+            
+            cout << "\n\nDijkstra's Shortest Path from " << start << " to " << dest << endl;
+            map<string, vector<string>>::iterator start_it, dest_it;
+            start_it = adjList.find(start);
+            dest_it = adjList.find(dest);
+            if (start_it == adjList.end()) {
+                cout << "Start node, " << start << ", not in graph!" << endl;
+                return;
+            } else if (dest_it == adjList.end()) {
+                cout << "Destination node, " << dest << ", not in graph!" << endl;
+                return;
             }
             
-            return {known_dist_map, prev_node_map};
+            stack<string> s;
+            if (start == dest)
+            {
+                cout << start << endl;
+                return;
+            }
+
+            map<string, int> known_dist_map;
+            map<string, string> prev_nodes_map;
+            tie(known_dist_map, prev_nodes_map) = dijkstra_unweighted(start);
+
+            string cur = dest;
+            string prev = prev_nodes_map[cur];
+            
+            while (cur != start) {
+                s.push(cur);
+                cur = prev_nodes_map[cur];
+            }
+            if (cur == start) {
+                s.push(cur);
+            }
+            while (s.empty() == false) {
+                string top = s.top();
+                cout << top << " ";
+                s.pop();
+            }
         }
 };
 
@@ -333,18 +495,16 @@ int main() {
     graph g;
     g.createMap();
     g.printEdges();
-    g.bft("A");
-    g.dft("A");
-    g.printEdges();
     // g.addEdge("A","Z");
     // g.printEdges();
     // g.removeEdge("A", "Z");
     // g.printEdges();
-    g.bfs("A", "D");
-    g.dfs("A", "D");
-    map<string, int> kdm;
-    map<string,string> pnm;
-    tie(kdm, pnm) = g.dijkstra_unweighted("A");
+    g.bft("A");
+    g.dft("A");
+    g.bfs("D", "C");
+    g.dfs("D", "C");
+    g.dijkstra_unweighted("A");
+    g.dijkstra_shortest_path("D", "C");
 
     return 0;
 }
