@@ -5,104 +5,104 @@ using namespace std;
 // abstract class, 'Player', because it has pure virtual function, 'pass'
 class Player
 {
-public:
-    // pure virtual function because it is not implemented, override is NECESSARY
-    virtual void pass() = 0;
+    public:
+        // pure virtual function because it is not implemented, override is NECESSARY
+        virtual void pass() = 0;
 
-    Player()
-    {
-        cout << "Create player class" << endl;
-    }
+        Player()
+        {
+            cout << "Create player class" << endl;
+        }
 
-    ~Player()
-    {
-        cout << "Destroy player class" << endl;
-    }
+        ~Player()
+        {
+            cout << "Destroy player class" << endl;
+        }
 };
 
 class Youth
 {
-public:
-    Youth()
-    {
-        cout << "Create youth class" << endl;
-    }
+    public:
+        Youth()
+        {
+            cout << "Create youth class" << endl;
+        }
 
-    // virtual function, override is optional
-    virtual void shoot()
-    {
-        cout << "shoot!" << endl;
-    }
+        // virtual function, override is optional
+        virtual void shoot()
+        {
+            cout << "shoot!" << endl;
+        }
 
-    virtual void pass()
-    {
-        cout << "pass!" << endl;
-    }
+        virtual void pass()
+        {
+            cout << "pass!" << endl;
+        }
 
-    void tackle()
-    {
-        cout << "tackle!" << endl;
-    }
+        void tackle()
+        {
+            cout << "tackle!" << endl;
+        }
 
-    ~Youth()
-    {
-        cout << "Destroy youth class" << endl;
-    }
+        ~Youth()
+        {
+            cout << "Destroy youth class" << endl;
+        }
 };
 
 class Striker : public Player, public Youth
 {
-public:
-    Striker() {
-        cout << "Create striker class" << endl;
-    }
+    public:
+        Striker() {
+            cout << "Create striker class" << endl;
+        }
 
-    void shoot()
-    {
-        cout << "shoot short range!" << endl;
-    }
+        void shoot()
+        {
+            cout << "shoot short range!" << endl;
+        }
 
-    void pass()
-    {
-        cout << "optional pass" << endl;
-    }
+        void pass()
+        {
+            cout << "optional pass" << endl;
+        }
 
-    ~Striker() {
-        cout << "Destroy striker class" << endl;
-    }
+        ~Striker() {
+            cout << "Destroy striker class" << endl;
+        }
 };
 
 class Midfielder : public Player, public Youth
 {
-public:
-    void shoot()
-    {
-        cout << "shoot long range!" << endl;
-    }
+    public:
+        void shoot()
+        {
+            cout << "shoot long range!" << endl;
+        }
 
-    void pass()
-    {
-        cout << "creative pass" << endl;
-    }
+        void pass()
+        {
+            cout << "creative pass" << endl;
+        }                                                                       
 };
 
 class Defender : public Player, public Youth
 {
-public:
-    Defender()
-    {
-        cout << "Create defender class" << endl;
-    }
+    public:
+        Defender()
+        {
+            cout << "Create defender class" << endl;
+        }
 
-    void pass()
-    {
-        cout << "safe pass" << endl;
-    }
+        void pass()
+        {
+            cout << "safe pass" << endl;
+        }
 
-    ~Defender()
-    {
-        cout << "Destroy defender class" << endl;
-    }
+        ~Defender()
+        {
+            cout << "Destroy defender class" << endl;
+        }
 };
 
 int main()
