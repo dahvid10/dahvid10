@@ -19,7 +19,7 @@ class Vector {
 
         void push_back(T data) {
             cout << "Add data to back of vector" << endl;
-            // set current index as data
+            // set data at current index 
             arr[currentIndex] = data;
             
             // increment current index and vector size for next possible data item
